@@ -26,7 +26,7 @@
 
                     <div class="flex gap-2 w-full md:w-auto">
                         <button type="submit" 
-                                class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-200 shadow-sm">
+                                class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-200 shadow-sm">
                             Filter
                         </button>
                         <a href="{{ route('admin.pegawai.index') }}" 
@@ -42,7 +42,7 @@
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="text-lg font-semibold text-gray-900">Daftar Pegawai</h3>
                     <a href="{{ route('admin.pegawai.create') }}" 
-                    class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-xl font-medium transition-all duration-200 shadow">
+                    class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl font-medium transition-all duration-200 shadow">
                         + Tambah Pegawai
                     </a>
                 </div>

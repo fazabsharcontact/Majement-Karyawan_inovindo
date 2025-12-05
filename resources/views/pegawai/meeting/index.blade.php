@@ -1,11 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Daftar Meeting
-        </h2>
-    </x-slot>
 
-    <div class="p-6">
+    <div class="p-6 pt-20">
         <div class="bg-white rounded-lg shadow p-6 space-y-4">
             @forelse($meetings as $meeting)
                 <div class="border rounded-lg p-4">

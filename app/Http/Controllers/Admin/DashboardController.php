@@ -45,18 +45,18 @@ class DashboardController extends Controller
         $kehadiran = DB::table('kehadirans as k')
             ->join('pegawais as p', 'k.pegawai_id', '=', 'p.id')
             ->where('k.created_at', '>=', $jangkauanWaktu)
-            ->select('k.created_at as waktu', DB::raw("CONCAT('⏳ Kehadiran: <b>', p.nama, '</b> (', k.status, ')') as keterangan"));
+            ->select('k.created_at as waktu', DB::raw("CONCAT('Kehadiran: <b>', p.nama, '</b> (', k.status, ')') as keterangan"));
 
         $gaji = DB::table('gajis as g')
             ->join('pegawais as p', 'g.pegawai_id', '=', 'p.id')
             ->where('g.created_at', '>=', $jangkauanWaktu)
-            ->select('g.created_at as waktu', DB::raw("CONCAT('💰 Gaji dibuat: <b>', p.nama, '</b> (Rp ', FORMAT(g.gaji_bersih, 0, 'id_ID'), ',-)') as keterangan"));
+            ->select('g.created_at as waktu', DB::raw("CONCAT('Gaji dibuat: <b>', p.nama, '</b> (Rp ', FORMAT(g.gaji_bersih, 0, 'id_ID'), ',-)') as keterangan"));
 
         $pegawaiUpdate = DB::table('pegawais as p')
             ->join('jabatans as j', 'p.jabatan_id', '=', 'j.id')
             ->where('p.updated_at', '>=', $jangkauanWaktu)
             ->whereColumn('p.updated_at', '!=', 'p.created_at')
-            ->select('p.updated_at as waktu', DB::raw("CONCAT('🔄 Data Pegawai diperbarui: <b>', p.nama, '</b> (Jabatan: <b>', j.nama_jabatan, '</b>)') as keterangan"));
+            ->select('p.updated_at as waktu', DB::raw("CONCAT('Data Pegawai diperbarui: <b>', p.nama, '</b> (Jabatan: <b>', j.nama_jabatan, '</b>)') as keterangan"));
 
         $aktivitas = $pegawaiBaru
             ->unionAll($kehadiran)

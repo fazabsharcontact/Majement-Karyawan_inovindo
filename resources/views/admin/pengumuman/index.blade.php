@@ -23,7 +23,7 @@
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="text-lg font-semibold text-gray-900">Arsip Pengumuman</h3>
                     <a href="{{ route('admin.pengumuman.create') }}" 
-                        class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-xl font-medium transition-all duration-200 shadow">
+                        class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl font-medium transition-all duration-200 shadow">
                         + Buat Pengumuman Baru
                     </a>
                 </div>

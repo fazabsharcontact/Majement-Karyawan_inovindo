@@ -2,8 +2,11 @@
 
 @php
 $classes = ($active ?? false)
-            ? 'inline-flex items-center px-4 py-2 rounded-full bg-gray-900 text-white text-sm font-bold transition'
-            : 'inline-flex items-center px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-gray-900 hover:text-white text-sm font-semibold transition';
+    ? 'flex items-center w-full px-4 py-2 rounded-lg bg-white text-black text-sm font-bold 
+       shadow-md relative
+       before:content-[""] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-blue-600'
+    : 'flex items-center w-full px-4 py-2 rounded-lg text-gray-800 
+       hover:bg-white hover:text-black text-sm font-semibold transition relative';
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>

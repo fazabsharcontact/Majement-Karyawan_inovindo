@@ -1,135 +1,113 @@
 <x-app-layout>
-    <div class="py-12 bg-white">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <div class="pt-20 sm:pt-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-            <!-- === HEADER HALAMAN === -->
-            <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-                <div>
-                    <h2 class="font-bold text-3xl text-gray-900 leading-tight">
-                        Gaji Pegawai
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-1">
-                        Lihat dan unduh slip gaji Anda di sini 
-                    </p>
-                </div>
-                <div class="flex items-center bg-gray-100 px-4 py-2 rounded-lg shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 mr-2" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M3 3h18M9 3v18m6-18v18M4.5 6h15m-15 4.5h15m-15 4.5h15m-15 4.5h15" />
-                    </svg>
-                    <span class="text-gray-700 text-sm font-medium">{{ now()->translatedFormat('l, d F Y') }}</span>
-                </div>
-            </div>
+            {{-- ================= WRAPPER CARD ================= --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-8">
 
-            <!-- === KONTEN UTAMA === -->
-            <div class="bg-white shadow-md rounded-lg p-8 space-y-8">
+                {{-- RINGKASAN GAJI --}}
+                <section class="space-y-3">
+                    <h2 class="text-lg font-semibold text-slate-900">Ringkasan Gaji Periode Saat Ini</h2>
 
-                <!-- Ringkasan Gaji -->
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-700">Ringkasan Gaji Periode Saat Ini</h3>
-                    <div class="mt-3 flex flex-wrap gap-3 items-center">
+                    <div class="flex flex-wrap gap-3 items-center">
                         @if ($detail)
                             <button
-                                class="px-5 py-2 bg-blue-600 text-white font-medium rounded-md shadow hover:bg-blue-700 transition"
+                                class="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition flex items-center gap-2"
                                 id="btnDetailGaji">
-                                Lihat Detail
-                                ({{ is_numeric($bulan) ? $bulanNama[$bulan] ?? 'Bulan Error' : 'Bulan Error' }}
-                                {{ $tahun }})
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                                Lihat Detail ({{ $bulanNama[$bulan] ?? 'Bulan Error' }} {{ $tahun }})
                             </button>
 
                             <a href="{{ route('pegawai.gaji.unduh', $detail->id) }}" target="_blank"
-                                class="px-5 py-2 bg-red-600 text-white font-medium rounded-md shadow hover:bg-red-700 transition">
+                                class="px-5 py-2.5 bg-rose-600 text-white font-medium rounded-lg shadow hover:bg-rose-700 transition flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
                                 Unduh Slip Gaji PDF
                             </a>
                         @else
-                            <p class="text-gray-500">
-                                Data gaji untuk periode
-                                {{ is_numeric($bulan) ? $bulanNama[$bulan] ?? 'Bulan Error' : 'Bulan Error' }}
-                                {{ $tahun }} belum tersedia.
-                            </p>
+                            <p class="text-slate-500">Data gaji untuk periode ini belum tersedia.</p>
                         @endif
                     </div>
-                </div>
+                </section>
 
-                <!-- Popup Detail Gaji -->
-                <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden z-50"
+                {{-- POPUP DETAIL GAJI --}}
+                <div class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 flex items-center justify-center"
                     id="popupDetailGaji">
-                    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
+                    <div class="bg-white w-full max-w-lg rounded-2xl shadow-lg border border-slate-200 p-6 animate-fadeIn">
                         <div class="flex justify-between items-center border-b pb-3">
-                            <h3 class="text-xl font-semibold text-gray-800">
-                                Detail Gaji:
-                                {{ is_numeric($bulan) ? $bulanNama[$bulan] ?? 'Bulan Error' : 'Bulan Error' }}
-                                {{ $tahun }}
+                            <h3 class="text-xl font-semibold text-slate-900">
+                                Detail Gaji: {{ $bulanNama[$bulan] ?? '' }} {{ $tahun }}
                             </h3>
-                            <button class="text-gray-400 hover:text-gray-600 text-2xl leading-none"
-                                id="closePopup">&times;</button>
+                            <button id="closePopup"
+                                class="text-slate-500 hover:text-slate-700 text-2xl leading-none">&times;</button>
                         </div>
 
-                        <div class="mt-4 space-y-2 text-gray-700">
+                        <div class="mt-4 space-y-3 text-slate-700">
                             @if ($detail)
-                                <div class="space-y-1">
-                                    <p><span class="font-medium text-gray-600">Gaji Pokok:</span>
-                                        <span class="float-right font-medium">
-                                            Rp {{ number_format($detail->gaji_pokok, 0, ',', '.') }}
-                                        </span>
-                                    </p>
 
-                                    <hr class="my-1 border-gray-200">
+                                {{-- Gaji Pokok --}}
+                                <p class="flex justify-between font-medium">
+                                    <span class="text-slate-600">Gaji Pokok:</span>
+                                    <span>Rp {{ number_format($detail->gaji_pokok, 0, ',', '.') }}</span>
+                                </p>
 
-                                    <p class="font-bold text-blue-600">PENERIMAAN</p>
-                                    @foreach ($detail->tunjanganDetails as $tunjangan)
-                                        <p class="text-sm ml-2">
-                                            <span class="text-gray-600">{{ $tunjangan->masterTunjangan->nama_tunjangan }}</span>
-                                            <span class="float-right">Rp
-                                                {{ number_format($tunjangan->jumlah, 0, ',', '.') }}</span>
+                                {{-- Tunjangan --}}
+                                <div class="pt-2 border-t border-slate-200">
+                                    <p class="font-semibold text-blue-600 mb-1">Penerimaan</p>
+                                    @foreach ($detail->tunjanganDetails as $t)
+                                        <p class="text-sm flex justify-between ml-2">
+                                            <span>{{ $t->masterTunjangan->nama_tunjangan }}</span>
+                                            <span>Rp {{ number_format($t->jumlah, 0, ',', '.') }}</span>
                                         </p>
                                     @endforeach
 
-                                    <p class="font-medium pt-1 border-t border-gray-300">
-                                        <span class="text-gray-600">Total Tunjangan:</span>
-                                        <span class="float-right text-green-600">Rp
+                                    <p class="font-medium flex justify-between pt-2 border-t border-slate-200">
+                                        <span>Total Tunjangan:</span>
+                                        <span class="text-emerald-600">Rp
                                             {{ number_format($detail->total_tunjangan, 0, ',', '.') }}</span>
                                     </p>
+                                </div>
 
-                                    <hr class="my-1 border-gray-200">
-
-                                    <p class="font-bold text-red-600">POTONGAN</p>
-                                    @foreach ($detail->potonganDetails as $potongan)
-                                        <p class="text-sm ml-2">
-                                            <span class="text-gray-600">{{ $potongan->masterPotongan->nama_potongan }}</span>
-                                            <span class="float-right">Rp
-                                                {{ number_format($potongan->jumlah, 0, ',', '.') }}</span>
+                                {{-- Potongan --}}
+                                <div class="pt-2 border-t border-slate-200">
+                                    <p class="font-semibold text-rose-600 mb-1">Potongan</p>
+                                    @foreach ($detail->potonganDetails as $p)
+                                        <p class="text-sm flex justify-between ml-2">
+                                            <span>{{ $p->masterPotongan->nama_potongan }}</span>
+                                            <span>Rp {{ number_format($p->jumlah, 0, ',', '.') }}</span>
                                         </p>
                                     @endforeach
 
-                                    <p class="font-medium pt-1 border-t border-gray-300">
-                                        <span class="text-gray-600">Total Potongan:</span>
-                                        <span class="float-right text-red-600">Rp
+                                    <p class="font-medium flex justify-between pt-2 border-t border-slate-200">
+                                        <span>Total Potongan:</span>
+                                        <span class="text-rose-600">Rp
                                             {{ number_format($detail->total_potongan, 0, ',', '.') }}</span>
                                     </p>
                                 </div>
 
-                                <p
-                                    class="text-2xl font-extrabold text-green-700 pt-4 border-t-2 border-green-200 mt-4">
+                                {{-- Gaji Bersih --}}
+                                <p class="text-xl font-extrabold text-emerald-700 flex justify-between pt-4 border-t-2 border-emerald-200">
                                     <span>Gaji Bersih:</span>
-                                    <span class="float-right">Rp
-                                        {{ number_format($detail->gaji_bersih, 0, ',', '.') }}
-                                    </span>
+                                    <span>Rp {{ number_format($detail->gaji_bersih, 0, ',', '.') }}</span>
                                 </p>
-                            @else
-                                <p>Data gaji belum tersedia.</p>
                             @endif
                         </div>
                     </div>
                 </div>
 
-                <!-- Filter Tahun & Bulan -->
+                {{-- FILTER --}}
                 <form method="GET" class="flex flex-wrap gap-6 items-end">
                     <div>
-                        <label for="tahun" class="block text-sm font-medium text-gray-600 mb-1">Tahun</label>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Tahun</label>
                         <select name="tahun"
-                            class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            class="rounded-lg border border-slate-300 px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
                             @for ($i = now()->year; $i >= 2020; $i--)
                                 <option value="{{ $i }}" {{ $tahun == $i ? 'selected' : '' }}>
                                     {{ $i }}
@@ -139,9 +117,9 @@
                     </div>
 
                     <div>
-                        <label for="bulan" class="block text-sm font-medium text-gray-600 mb-1">Bulan</label>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Bulan</label>
                         <select name="bulan"
-                            class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            class="rounded-lg border border-slate-300 px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
                             @foreach ($bulanNama as $key => $value)
                                 <option value="{{ $key }}" {{ $bulan == $key ? 'selected' : '' }}>
                                     {{ $value }}
@@ -151,63 +129,68 @@
                     </div>
 
                     <button type="submit"
-                        class="px-5 py-2 bg-gray-900 text-white font-medium rounded-md shadow hover:bg-gray-800 transition">
+                        class="px-5 py-2.5 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 transition">
                         Lihat Data
                     </button>
                 </form>
 
-                <!-- Riwayat Gaji -->
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Riwayat Gaji</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full border border-gray-200 text-sm rounded-lg overflow-hidden">
-                            <thead>
-                                <tr class="bg-gray-100 text-gray-700">
-                                    <th class="px-4 py-3 border text-left">Tahun</th>
-                                    <th class="px-4 py-3 border text-left">Bulan</th>
-                                    <th class="px-4 py-3 border text-left">Gaji Bersih</th>
-                                    <th class="px-4 py-3 border text-center">Aksi</th>
+                {{-- RIWAYAT GAJI --}}
+                <section>
+                    <h2 class="text-lg font-semibold text-slate-900 mb-3">Riwayat Gaji</h2>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">Tahun</th>
+                                    <th class="px-4 py-3 text-left">Bulan</th>
+                                    <th class="px-4 py-3 text-left">Gaji Bersih</th>
+                                    <th class="px-4 py-3 text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200">
+
+                            <tbody class="divide-y divide-slate-200">
                                 @forelse($riwayat as $row)
-                                    <tr class="hover:bg-gray-50">
+                                    <tr class="hover:bg-slate-50 transition">
                                         <td class="px-4 py-3">{{ $row->tahun }}</td>
                                         <td class="px-4 py-3">
-                                            {{ is_numeric($row->bulan) ? $bulanNama[$row->bulan] ?? 'Bulan Error' : 'Bulan Error' }}
+                                            {{ $bulanNama[$row->bulan] ?? '' }}
                                         </td>
-                                        <td class="px-4 py-3 font-medium text-gray-800">
+                                        <td class="px-4 py-3 font-semibold text-slate-800">
                                             Rp {{ number_format($row->gaji_bersih, 0, ',', '.') }}
                                         </td>
                                         <td class="px-4 py-3 text-center">
                                             <a href="{{ route('pegawai.gaji.unduh', $row->id) }}" target="_blank"
-                                                class="inline-flex items-center px-3 py-1 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300 transition">
+                                                class="px-3 py-1.5 bg-rose-500 text-white rounded-md text-xs font-semibold hover:bg-rose-600">
                                                 Unduh PDF
                                             </a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="px-4 py-3 text-center text-gray-500">
-                                            Data riwayat gaji tidak ditemukan
+                                        <td colspan="4" class="px-4 py-4 text-center text-slate-500">
+                                            Data riwayat gaji tidak ditemukan.
                                         </td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </section>
 
             </div>
         </div>
     </div>
 
+    {{-- POPUP JS --}}
     <script>
         document.getElementById("btnDetailGaji")?.addEventListener("click", () => {
             document.getElementById("popupDetailGaji").classList.remove("hidden");
         });
+
         document.getElementById("closePopup")?.addEventListener("click", () => {
             document.getElementById("popupDetailGaji").classList.add("hidden");
         });
     </script>
+
 </x-app-layout>

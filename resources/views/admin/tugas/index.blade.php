@@ -9,7 +9,7 @@
                 <p class="text-sm text-gray-500 mt-1">Kelola dan pantau semua tugas pegawai secara efisien.</p>
             </div>
             <button id="open-modal-button"
-                class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-md shadow transition duration-300">
+                class="bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow transition duration-300">
                 + Tambah Tugas Baru
             </button>
         </div>
@@ -88,7 +88,7 @@
 
                 <div class="flex gap-2 items-end">
                     <button type="submit"
-                        class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-md shadow w-full">
+                        class="bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow w-full">
                         Filter
                     </button>
                     <a href="{{ route('admin.tugas.index') }}"
