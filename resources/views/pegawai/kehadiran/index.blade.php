@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="py-6 pt-20">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        1
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
 
                 @if (session('success'))
