@@ -1,0 +1,142 @@
+var classes = [
+    {
+        "name": "App\\Http\\Controllers\\Admin\\GajiController",
+        "interface": false,
+        "abstract": false,
+        "final": false,
+        "methods": [
+            {
+                "name": "index",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "create",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "store",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "edit",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "update",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "destroy",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "unduhSlipGaji",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "cekGajiPegawai",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            }
+        ],
+        "nbMethodsIncludingGettersSetters": 8,
+        "nbMethods": 8,
+        "nbMethodsPrivate": 0,
+        "nbMethodsPublic": 8,
+        "nbMethodsGetter": 0,
+        "nbMethodsSetters": 0,
+        "wmc": 18,
+        "ccn": 11,
+        "ccnMethodMax": 5,
+        "externals": [
+            "App\\Http\\Controllers\\Controller",
+            "Illuminate\\Http\\Request",
+            "App\\Models\\Gaji",
+            "App\\Models\\Jabatan",
+            "Carbon\\Carbon",
+            "Carbon\\Carbon",
+            "Carbon\\Carbon",
+            "Carbon\\Carbon",
+            "App\\Models\\Pegawai",
+            "App\\Models\\Pegawai",
+            "App\\Models\\MasterTunjangan",
+            "App\\Models\\MasterPotongan",
+            "Illuminate\\Http\\Request",
+            "App\\Models\\Gaji",
+            "Illuminate\\Support\\Facades\\DB",
+            "App\\Models\\Gaji",
+            "App\\Models\\Pegawai",
+            "App\\Models\\MasterTunjangan",
+            "App\\Models\\MasterPotongan",
+            "Illuminate\\Http\\Request",
+            "App\\Models\\Gaji",
+            "Illuminate\\Support\\Facades\\DB",
+            "App\\Models\\Gaji",
+            "App\\Models\\Gaji",
+            "Barryvdh\\DomPDF\\Facade\\Pdf",
+            "Illuminate\\Http\\Request",
+            "App\\Models\\Gaji",
+            "App\\Models\\Pegawai"
+        ],
+        "parents": [
+            "App\\Http\\Controllers\\Controller"
+        ],
+        "implements": [],
+        "lcom": 8,
+        "length": 346,
+        "vocabulary": 87,
+        "volume": 2229.26,
+        "difficulty": 12.6,
+        "effort": 28088.66,
+        "level": 0.08,
+        "bugs": 0.74,
+        "time": 1560,
+        "intelligentContent": 176.93,
+        "number_operators": 58,
+        "number_operands": 288,
+        "number_operators_unique": 7,
+        "number_operands_unique": 80,
+        "cloc": 15,
+        "loc": 124,
+        "lloc": 109,
+        "mi": 56.29,
+        "mIwoC": 30.63,
+        "commentWeight": 25.66,
+        "kanDefect": 1.49,
+        "relativeStructuralComplexity": 2304,
+        "relativeDataComplexity": 0.18,
+        "relativeSystemComplexity": 2304.18,
+        "totalStructuralComplexity": 18432,
+        "totalDataComplexity": 1.47,
+        "totalSystemComplexity": 18433.47,
+        "package": "App\\Http\\Controllers\\Admin\\",
+        "pageRank": 1,
+        "afferentCoupling": 0,
+        "efferentCoupling": 10,
+        "instability": 1,
+        "violations": {}
+    }
+]
